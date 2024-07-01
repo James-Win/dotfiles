@@ -1,0 +1,5 @@
+2024/05/08-17:37:16.191 18d0 Creating DB /home/james/.config/obsidian/IndexedDB/app_obsidian.md_0.indexeddb.leveldb since it was missing.
+2024/05/08-17:37:16.208 18d0 Reusing MANIFEST /home/james/.config/obsidian/IndexedDB/app_obsidian.md_0.indexeddb.leveldb/MANIFEST-000001
+2024/05/08-17:48:47.574 18d1 Level-0 table #5: started
+2024/05/08-17:48:47.596 18d1 Level-0 table #5: 1316418 bytes OK
+2024/05/08-17:48:47.601 18d1 Delete type=0 #3

@@ -1,0 +1,54 @@
+2024-06-30 18:27:49.189 [info] Started initializing default profile extensions in extensions installation folder. file:///home/james/.vscode-oss/extensions
+2024-06-30 18:27:49.475 [warning] Failed to create default profile extensions manifest in extensions installation folder. file:///home/james/.vscode-oss/extensions Unable to create file 'vscode-userdata:/home/james/.vscode-oss/extensions/extensions.json' that already exists when overwrite flag is not set
+2024-06-30 18:27:49.476 [info] Completed initializing default profile extensions in extensions installation folder. file:///home/james/.vscode-oss/extensions
+2024-06-30 18:28:23.093 [info] Getting Manifest... james-yu.latex-workshop
+2024-06-30 18:28:23.232 [info] Installing extension: james-yu.latex-workshop vscode-userdata:/home/james/.vscode-oss/extensions/extensions.json
+2024-06-30 18:28:27.650 [error] Could not load vsce-sign module Cannot find module '@vscode/vsce-sign'
+Require stack:
+- /usr/lib/code/out/bootstrap-amd.js
+- /usr/lib/code/out/bootstrap-fork.js
+2024-06-30 18:28:27.651 [info] Extension signature verification is not done: james-yu.latex-workshop
+2024-06-30 18:28:33.402 [info] Extracted extension to file:///home/james/.vscode-oss/extensions/james-yu.latex-workshop-10.1.0-universal: james-yu.latex-workshop
+2024-06-30 18:28:33.436 [info] Renamed to /home/james/.vscode-oss/extensions/james-yu.latex-workshop-10.1.0-universal
+2024-06-30 18:28:33.629 [error] [uncaught exception in sharedProcess]: Error: ENOENT: no such file or directory, stat '/home/james/.vscode-oss/extensions/extensions.json.vsctmp': EntryNotFound (FileSystemError): Error: ENOENT: no such file or directory, stat '/home/james/.vscode-oss/extensions/extensions.json.vsctmp'
+    at c.create (/usr/lib/code/out/vs/code/node/sharedProcess/sharedProcessMain.js:53:19235)
+    at m (/usr/lib/code/out/vs/code/node/sharedProcess/sharedProcessMain.js:53:19345)
+    at t.hb (/usr/lib/code/out/vs/code/node/sharedProcess/sharedProcessMain.js:58:36685)
+    at t.stat (/usr/lib/code/out/vs/code/node/sharedProcess/sharedProcessMain.js:58:29033)
+    at async b.stat (/usr/lib/code/out/vs/code/node/sharedProcess/sharedProcessMain.js:58:14899)
+    at async H.vb (/usr/lib/code/out/vs/code/node/sharedProcess/sharedProcessMain.js:104:117665)
+2024-06-30 18:28:33.674 [info] Extension installed successfully: james-yu.latex-workshop vscode-userdata:/home/james/.vscode-oss/extensions/extensions.json
+2024-06-30 18:28:50.133 [info] Getting Manifest... draivin.hsnips
+2024-06-30 18:28:50.289 [info] Installing extension: draivin.hsnips vscode-userdata:/home/james/.vscode-oss/extensions/extensions.json
+2024-06-30 18:28:50.562 [info] Getting Manifest... draivin.hscopes
+2024-06-30 18:28:51.138 [info] Installing extension: draivin.hscopes vscode-userdata:/home/james/.vscode-oss/extensions/extensions.json
+2024-06-30 18:28:52.058 [error] Could not load vsce-sign module Cannot find module '@vscode/vsce-sign'
+Require stack:
+- /usr/lib/code/out/bootstrap-amd.js
+- /usr/lib/code/out/bootstrap-fork.js
+2024-06-30 18:28:52.059 [info] Extension signature verification is not done: draivin.hsnips
+2024-06-30 18:28:52.180 [error] Could not load vsce-sign module Cannot find module '@vscode/vsce-sign'
+Require stack:
+- /usr/lib/code/out/bootstrap-amd.js
+- /usr/lib/code/out/bootstrap-fork.js
+2024-06-30 18:28:52.180 [info] Extension signature verification is not done: draivin.hscopes
+2024-06-30 18:28:52.308 [info] Extracted extension to file:///home/james/.vscode-oss/extensions/draivin.hsnips-0.2.9-universal: draivin.hsnips
+2024-06-30 18:28:52.317 [info] Renamed to /home/james/.vscode-oss/extensions/draivin.hsnips-0.2.9-universal
+2024-06-30 18:28:52.432 [error] [uncaught exception in sharedProcess]: Error: ENOENT: no such file or directory, stat '/home/james/.vscode-oss/extensions/extensions.json.vsctmp': EntryNotFound (FileSystemError): Error: ENOENT: no such file or directory, stat '/home/james/.vscode-oss/extensions/extensions.json.vsctmp'
+    at c.create (/usr/lib/code/out/vs/code/node/sharedProcess/sharedProcessMain.js:53:19235)
+    at m (/usr/lib/code/out/vs/code/node/sharedProcess/sharedProcessMain.js:53:19345)
+    at t.hb (/usr/lib/code/out/vs/code/node/sharedProcess/sharedProcessMain.js:58:36685)
+    at t.stat (/usr/lib/code/out/vs/code/node/sharedProcess/sharedProcessMain.js:58:29033)
+    at async b.stat (/usr/lib/code/out/vs/code/node/sharedProcess/sharedProcessMain.js:58:14899)
+    at async H.vb (/usr/lib/code/out/vs/code/node/sharedProcess/sharedProcessMain.js:104:117665)
+2024-06-30 18:28:52.668 [info] Extracted extension to file:///home/james/.vscode-oss/extensions/draivin.hscopes-0.0.9-universal: draivin.hscopes
+2024-06-30 18:28:52.690 [info] Renamed to /home/james/.vscode-oss/extensions/draivin.hscopes-0.0.9-universal
+2024-06-30 18:28:52.807 [error] [uncaught exception in sharedProcess]: Error: ENOENT: no such file or directory, stat '/home/james/.vscode-oss/extensions/extensions.json.vsctmp': EntryNotFound (FileSystemError): Error: ENOENT: no such file or directory, stat '/home/james/.vscode-oss/extensions/extensions.json.vsctmp'
+    at c.create (/usr/lib/code/out/vs/code/node/sharedProcess/sharedProcessMain.js:53:19235)
+    at m (/usr/lib/code/out/vs/code/node/sharedProcess/sharedProcessMain.js:53:19345)
+    at t.hb (/usr/lib/code/out/vs/code/node/sharedProcess/sharedProcessMain.js:58:36685)
+    at t.stat (/usr/lib/code/out/vs/code/node/sharedProcess/sharedProcessMain.js:58:29033)
+    at async b.stat (/usr/lib/code/out/vs/code/node/sharedProcess/sharedProcessMain.js:58:14899)
+    at async H.vb (/usr/lib/code/out/vs/code/node/sharedProcess/sharedProcessMain.js:104:117665)
+2024-06-30 18:28:52.856 [info] Extension installed successfully: draivin.hsnips vscode-userdata:/home/james/.vscode-oss/extensions/extensions.json
+2024-06-30 18:28:52.856 [info] Extension installed successfully: draivin.hscopes vscode-userdata:/home/james/.vscode-oss/extensions/extensions.json

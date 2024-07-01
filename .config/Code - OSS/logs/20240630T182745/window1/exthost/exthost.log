@@ -1,0 +1,12 @@
+2024-06-30 18:27:49.461 [info] Extension host with pid 8196 started
+2024-06-30 18:27:49.520 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*', root cause: vscode.git
+2024-06-30 18:27:49.559 [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*'
+2024-06-30 18:27:49.747 [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+2024-06-30 18:27:50.033 [info] Eager extensions activated
+2024-06-30 18:27:50.129 [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: false, activationEvent: 'onStartupFinished'
+2024-06-30 18:27:50.135 [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+2024-06-30 18:28:04.204 [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onLanguage'
+2024-06-30 18:28:53.044 [info] ExtensionService#_doActivateExtension draivin.hscopes, startup: false, activationEvent: '*', root cause: draivin.hsnips
+2024-06-30 18:28:53.140 [info] ExtensionService#_doActivateExtension draivin.hsnips, startup: false, activationEvent: '*'
+2024-06-30 18:31:56.092 [info] Extension host terminating: renderer closed the MessagePort
+2024-06-30 18:31:56.100 [info] Extension host with pid 8196 exiting with code 0
