@@ -1,0 +1,5 @@
+name: smart_reader
+version: 1.0.0
+description: Read the last N lines of a file or log. ALWAYS use this instead of reading an entire file to save context tokens.
+provides_tools:
+  - tail_log

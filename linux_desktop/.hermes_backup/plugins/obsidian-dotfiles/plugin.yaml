@@ -1,0 +1,5 @@
+name: obsidian-dotfiles
+version: "1.0.0"
+description: Safe dry-run-first GNU Stow dotfile migration into an Obsidian-backed vault
+provides_tools:
+  - sync_dotfiles_to_obsidian
