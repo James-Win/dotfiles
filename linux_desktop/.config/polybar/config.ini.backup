@@ -1,0 +1,71 @@
+[bar/main]
+width = 100%
+height = 28
+offset-x = 0
+offset-y = 8
+bottom = false
+
+background = #170d02
+foreground = #ffffff
+
+module-margin-left = 1
+module-margin-right = 1
+
+modules-left = i3
+modules-right = cpu ram volume tray date
+
+wm-restack = i3
+override-redirect = false
+
+font-0 = monospace:size=10
+
+[module/i3]
+type = internal/i3
+only-focused = false
+pin-workspaces = true
+inline-mode = false
+label-mode = %mode%
+label-mode-padding = 2
+label-focused = %index%
+label-focused-foreground = #ffac02
+label-focused-background = #2a1a05
+label-focused-padding = 2
+label-unfocused = %index%
+label-unfocused-foreground = #aaa
+label-unfocused-padding = 2
+label-visible = %index%
+label-visible-padding = 2
+label-urgent = %index%!
+label-urgent-foreground = #ff4444
+label-urgent-padding = 2
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+label = CPU %percentage%%
+
+[module/ram]
+type = internal/memory
+interval = 10
+label = RAM %percentage_used%%
+label-memory = RAM %percentage_used%% (%mb_used% MB)
+
+[module/volume]
+type = custom/script
+exec = pactl get-sink-volume @DEFAULT_SINK@ 2>/dev/null | grep -o '[0-9]*%' | head -1
+interval = 1
+label = VOL %output%
+click-left = pavucontrol
+click-right = pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+[module/tray]
+type = internal/tray
+format-margin = 1
+tray-spacing = 6px
+
+[module/date]
+type = internal/date
+date = %H:%M
+date-alt = %a, %d %b %Y
+label = %date%
+label-foreground = #ffac02

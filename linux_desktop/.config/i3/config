@@ -1,0 +1,268 @@
+# ============================================================
+# i3 Config
+# Fedora + i3 + Polybar modern setup
+# ============================================================
+
+# Mod key: Windows/Super key
+set $mod Mod4
+
+# ============================================================
+# Appearance
+# ============================================================
+
+font pango:JetBrains Mono 9
+
+default_border pixel 2
+default_floating_border pixel 2
+
+hide_edge_borders smart
+
+gaps inner 8
+gaps outer 8
+
+# Window colors
+# class                 border  bground text    indicator child_border
+client.focused          #83CAFA #1a1a1a #FFFFFF #83CAFA   #83CAFA
+client.focused_inactive #333333 #222222 #8C8C8C #333333   #333333
+client.unfocused        #222222 #222222 #888888 #222222   #222222
+client.urgent           #EC69A0 #DB3279 #FFFFFF #EC69A0   #EC69A0
+client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
+client.background       #1a1a1a
+
+# ============================================================
+# Startup Programs
+# ============================================================
+
+
+
+# XDG autostart apps
+exec --no-startup-id dex-autostart --autostart --environment i3
+
+# Compositor
+exec --no-startup-id picom --config ~/.config/picom/picom.conf
+
+# Notifications
+exec --no-startup-id dunst -config ~/desktop-setup/dunst/dunstrc
+
+# Lock screen before suspend
+exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/.config/i3/scripts/lock.sh
+
+# Network tray applet
+exec --no-startup-id nm-applet
+
+# Clipboard manager
+exec --no-startup-id greenclip daemon > /dev/null
+
+# Wallpaper
+exec_always --no-startup-id ~/.fehbg
+
+# Polybar
+exec_always --no-startup-id ~/.config/polybar/launch.sh
+
+# Custom window rule script
+exec_always --no-startup-id ~/.config/i3/scripts/start-max-2-windows.sh
+exec_always --no-startup-id ~/.local/bin/max-2-windows.py
+
+# ============================================================
+# Applications
+# ============================================================
+
+# Terminal
+bindsym $mod+Return exec --no-startup-id kitty
+
+# Firefox
+bindsym $mod+Shift+f exec --no-startup-id firefox
+
+# Rofi app launcher
+bindsym $mod+space exec --no-startup-id "rofi -show drun -theme ~/desktop-setup/rofi/theme.rasi"
+
+# Optional Rofi run/window/ssh mode
+# bindsym $mod+Shift+d exec --no-startup-id "rofi -modi run,window,ssh -show run -theme ~/desktop-setup/rofi/theme.rasi"
+
+# PulseAudio/PipeWire volume control
+bindsym $mod+Shift+v exec --no-startup-id pavucontrol
+
+bindsym $mod+Shift+Escape exec --no-startup-id i3-nagbar -t warning -m 'Kill all apps and end this user session?' -b 'Yes, kill everything' 'pkill -KILL -u "$USER"'
+
+# ============================================================
+# Screenshots
+# ============================================================
+
+# Select region and copy to clipboard
+bindsym Print exec --no-startup-id "maim -s | xclip -selection clipboard -t image/png"
+
+# Select region and save to Pictures
+bindsym Shift+Print exec --no-startup-id "maim -s ~/Pictures/screenshot_$(date +%Y-%m-%d_%H-%M-%S).png"
+
+# Capture full screen and copy to clipboard
+bindsym Ctrl+Print exec --no-startup-id "maim | xclip -selection clipboard -t image/png"
+
+# ============================================================
+# Audio Controls
+# ============================================================
+
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+# ============================================================
+# Window Management
+# ============================================================
+
+# Kill focused window
+bindsym $mod+Shift+q kill
+
+# Drag floating windows with mouse + mod
+floating_modifier $mod
+
+# Toggle floating
+bindsym $mod+Shift+space floating toggle
+
+# Fullscreen
+bindsym $mod+f fullscreen toggle
+
+# Focus next/previous window
+bindsym $mod+Tab focus next
+bindsym $mod+Shift+Tab focus prev
+
+# Focus directions
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+
+# Focus directions with arrow keys
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move windows
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+
+# Move windows with arrow keys
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Split orientation
+# bindsym $mod+h split h
+bindsym $mod+v split v
+
+# Layout modes
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Focus parent container
+bindsym $mod+a focus parent
+
+# Focus child container
+# bindsym $mod+d focus child
+
+# ============================================================
+# Workspaces
+# ============================================================
+
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# Switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# Move focused window to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# ============================================================
+# Resize Mode
+# ============================================================
+
+mode "resize" {
+    # Resize with vim keys
+    bindsym j resize shrink width 10 px or 10 ppt
+    bindsym k resize grow height 10 px or 10 ppt
+    bindsym l resize shrink height 10 px or 10 ppt
+    bindsym semicolon resize grow width 10 px or 10 ppt
+
+    # Resize with arrow keys
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+
+    # Exit resize mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# ============================================================
+# i3 Controls
+# ============================================================
+
+# Reload config
+bindsym $mod+Shift+c reload
+
+# Restart i3 in place
+bindsym $mod+Shift+r restart
+
+# Exit i3 session
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# ============================================================
+# Disabled Default i3bar
+# ============================================================
+
+# Polybar replaces i3bar.
+# Keep this disabled to avoid the extra bottom bar.
+#
+# bar {
+#     status_command i3status
+# }
+# Popup and dialog floating rules
+for_window [window_type="dialog"] floating enable
+for_window [window_type="utility"] floating enable
+for_window [window_type="toolbar"] floating enable
+for_window [window_type="splash"] floating enable
+for_window [window_type="menu"] floating enable
+for_window [window_type="dropdown_menu"] floating enable
+for_window [window_type="popup_menu"] floating enable
+for_window [window_type="tooltip"] floating enable
+
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="popup"] floating enable
+for_window [window_role="dialog"] floating enable
+for_window [window_role="task_dialog"] floating enable
