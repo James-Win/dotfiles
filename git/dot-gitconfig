@@ -1,9 +1,47 @@
 [user]
 	name = James Win
 	email = its.james.nguyen@gmail.com
+
 [credential "https://github.com"]
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
+
 [credential "https://gist.github.com"]
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
+
+[init]
+	defaultBranch = main
+
+[core]
+	editor = nano
+	excludesFile = ~/.gitignore
+	pager = less -FRX
+
+[pull]
+	rebase = true
+
+[push]
+	autoSetupRemote = true
+
+[fetch]
+	prune = true
+
+[diff]
+	colorMoved = default
+
+[merge]
+	conflictstyle = diff3
+
+[rebase]
+	autoStash = true
+
+[alias]
+	st = status
+	co = checkout
+	br = branch
+	lg = log --graph --oneline --decorate --all -20
+	last = log -1 HEAD --stat
+	unstage = reset HEAD --
+	amend = commit --amend --no-edit
+
