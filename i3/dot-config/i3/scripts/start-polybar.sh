@@ -12,7 +12,7 @@ pkill -x polybar 2>/dev/null || true
 sleep 0.5
 
 # Launch one bar per output
-for m in $(xrandr --listmonitors | awk 'NR>1 {print $4}'); do
+for m in $(polybar --list-monitors | cut -d':' -f1); do
   MONITOR="$m" polybar -q "$BAR_NAME" &
 done
 

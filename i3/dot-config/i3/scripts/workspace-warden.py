@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import logging
 import sys
+import threading
 import time
 from typing import Optional
 
@@ -317,27 +318,37 @@ def enforce_max_windows_for_workspace(workspace) -> int:
 # Event handling and startup sweep
 # -----------------------------------------------------------------------------
 
-def refetch_container(conn: i3ipc.Connection, con_id: int):
-    tree = conn.get_tree()
-    return tree.find_by_id(con_id)
+def _deferred_enforce_rules(con_id: int) -> None:
+    # Give i3 a moment to apply styling/position rules
+    time.sleep(ATTACH_DELAY)
+
+    # Open a brief dedicated thread connection to i3
+    thread_conn = i3ipc.Connection()
+    try:
+        tree = thread_conn.get_tree()
+        con = tree.find_by_id(con_id)
+        if con is None:
+            logging.info("Window disappeared before handling; skipping")
+            return
+
+        # Highest-priority rule: Workspace 1 belongs to Steam.
+        moved = enforce_steam_only_workspace(con)
+        if moved:
+            return
+
+        # Lower-priority rule: other workspaces get at most MAX_WINDOWS counted windows.
+        enforce_max_windows_for_container(con)
+    except Exception:
+        logging.exception("Error checking container in background thread")
 
 
 def on_window_event(conn: i3ipc.Connection, event) -> None:
-    # Give i3 a moment to apply floating/dialog/assignment rules.
-    time.sleep(ATTACH_DELAY)
-
-    con = refetch_container(conn, event.container.id)
-    if con is None:
-        logging.info("Window disappeared before handling; skipping")
-        return
-
-    # Highest-priority rule: Workspace 1 belongs to Steam.
-    moved = enforce_steam_only_workspace(con)
-    if moved:
-        return
-
-    # Lower-priority rule: other workspaces get at most MAX_WINDOWS counted windows.
-    enforce_max_windows_for_container(con)
+    # Delegate execution to a background thread to keep the main listener responsive
+    threading.Thread(
+        target=_deferred_enforce_rules,
+        args=(event.container.id,),
+        daemon=True
+    ).start()
 
 
 def initial_sweep(conn: i3ipc.Connection) -> None:
