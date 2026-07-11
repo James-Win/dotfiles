@@ -8,7 +8,7 @@ import os
 PRIVATE_KEY_PATTERN = re.compile(r"-----BEGIN.*PRIVATE KEY-----")
 # Assignment of potential secrets: variable containing key/secret/token/password assigned to a string literal
 SECRET_ASSIGNMENT_PATTERN = re.compile(
-    r"(?i)\b(key|secret|token|password|passwd|auth|api_?key)\b\s*[:=]\s*[\"']([^\"']+)[\"']"
+    r"(?i)\b([a-z0-9_-]*(?:key|secret|token|password|passwd|auth|api_?key)[a-z0-9_-]*)\b\s*[:=]\s*[\"']([^\"']+)[\"']"
 )
 
 # Common safe placeholders and false-positive exceptions

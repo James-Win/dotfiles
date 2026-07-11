@@ -1,0 +1,130 @@
+configuration {
+    modi: "drun,run,window";
+    show-icons: true;
+    icon-theme: "Papirus-Dark";
+    font: "JetBrains Mono 11";
+    display-drun: "Apps";
+    display-run: "Run";
+    display-window: "Windows";
+    drun-display-format: "{name}";
+}
+
+* {
+    bg:            #170d02;
+    bg-alt:        #221406;
+    surface:       #1a1a1a;
+    surface-alt:   #222222;
+    fg:            #ffffff;
+    fg-muted:      #8c8c8c;
+    accent:        #83cafa;
+    urgent:        #ec69a0;
+
+    background-color: transparent;
+    text-color: @fg;
+
+    margin: 0;
+    padding: 0;
+    spacing: 0;
+}
+
+window {
+    location: center;
+    anchor: center;
+
+    width: 42%;
+    border: 2px;
+    border-radius: 14px;
+    border-color: @accent;
+
+    background-color: @bg;
+    padding: 20px;
+}
+
+mainbox {
+    background-color: @bg;
+    spacing: 14px;
+}
+
+inputbar {
+    background-color: @surface;
+    border-radius: 10px;
+    padding: 12px;
+    spacing: 10px;
+}
+
+prompt {
+    text-color: @accent;
+    font: "JetBrains Mono Bold 11";
+}
+
+entry {
+    placeholder: "Search...";
+    placeholder-color: @fg-muted;
+    text-color: @fg;
+}
+
+message {
+    background-color: @surface;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+textbox {
+    text-color: @fg;
+}
+
+listview {
+    background-color: @bg;
+    columns: 1;
+    lines: 8;
+    spacing: 8px;
+    fixed-height: true;
+}
+
+element {
+    background-color: @bg;
+    border-radius: 10px;
+    padding: 10px;
+    spacing: 10px;
+}
+
+element-icon {
+    size: 24px;
+}
+
+element-text {
+    text-color: @fg;
+    vertical-align: 0.5;
+}
+
+element normal.normal {
+    background-color: @bg;
+    text-color: @fg;
+}
+
+element selected.normal {
+    background-color: @accent;
+    text-color: @bg;
+}
+
+element selected.normal element-text {
+    text-color: @bg;
+}
+
+element selected.normal element-icon {
+    background-color: transparent;
+}
+
+element alternate.normal {
+    background-color: @bg-alt;
+}
+
+element urgent.normal {
+    background-color: @urgent;
+    text-color: @fg;
+}
+
+element active.normal {
+    background-color: @surface-alt;
+    text-color: @fg;
+}
