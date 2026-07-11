@@ -40,19 +40,40 @@ sudo dnf install -y \
 
 *Note: For the clipboard daemon (`greenclip`), you may need to download the binary manually and place it in your path (e.g., `~/.local/bin/greenclip`).*
 
-### 2. Clone the Repository
-Clone this repository directly into your home directory:
+### 2. Run the Bootstrap Script (Recommended)
+You can automatically install all dependencies, enable the Starship prompt repository, deploy symlinks, and configure Git hooks using the provided bootstrap script:
 
 ```bash
 git clone <your-repository-url> ~/dotfiles
 cd ~/dotfiles
+./setup.sh
 ```
 
-### 3. Deploy Symlinks using GNU Stow
-Use `stow` to link the configurations to your home directory. The `--dotfiles` flag will automatically rename files starting with `dot-` (e.g., `dot-bashrc`) to their hidden equivalents (e.g., `.bashrc`) in your home directory:
+---
+
+### Manual Deployment Alternative
+
+If you prefer to deploy files manually:
+
+#### 1. Enable the Starship Prompt Repository
+```bash
+sudo dnf copr enable -y atim/starship
+sudo dnf install -y starship
+```
+
+#### 2. Deploy Symlinks using GNU Stow
+Use `stow` to link the configurations to your home directory. The `--dotfiles` flag will automatically rename files starting with `dot-` (e.g., `dot-bashrc`) to their hidden equivalents (e.g., `.bashrc`):
 
 ```bash
-stow --dotfiles -v -R -t ~ bash zsh git i3 kitty polybar picom dunst mangohud thunar hermes
+stow --dotfiles -v -R -t ~ bash zsh git i3 kitty polybar picom dunst mangohud thunar hermes rofi gtk xsettingsd starship
+```
+
+#### 3. Setup Pre-commit Hook
+Copy the key scanner hook to your repository configuration:
+```bash
+mkdir -p .git/hooks
+cp git-hooks/pre-commit .git/hooks/pre-commit
+chmod +x .git/hooks/pre-commit
 ```
 
 ---
@@ -71,6 +92,11 @@ Each subdirectory at the root level acts as a "stow package":
 * **`mangohud/`**: Hardware monitoring overlay.
 * **`thunar/`**: Custom user actions for the Thunar file manager.
 * **`hermes/`**: Agent configurations and skills (`.hermes_backup`).
+* **`rofi/`**: Application search launcher config and theme.
+* **`gtk/`**: GTK theme settings for GTK 2, 3, and 4 (`.gtkrc-2.0`, `settings.ini`).
+* **`xsettingsd/`**: Desktop server configurations (`xsettingsd.conf`).
+* **`starship/`**: Starship prompt layout settings (`starship.toml`).
+* **`git-hooks/`**: Source scripts for Git hooks (like the credential scanning `pre-commit` hook).
 
 ---
 
@@ -86,3 +112,8 @@ To make changes to a configuration file:
    git commit -m "update configuration"
    git push
    ```
+
+*Note: The built-in pre-commit hook scans staged changes for potential credentials or private keys. If a commit is blocked due to a false positive, you can bypass the hook using:*
+```bash
+git commit --no-verify
+```
