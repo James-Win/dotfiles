@@ -1,0 +1,100 @@
+#!/usr/bin/env python3
+import sys
+import subprocess
+import re
+import os
+
+# Define regex patterns
+PRIVATE_KEY_PATTERN = re.compile(r"-----BEGIN.*PRIVATE KEY-----")
+# Assignment of potential secrets: variable containing key/secret/token/password assigned to a string literal
+SECRET_ASSIGNMENT_PATTERN = re.compile(
+    r"(?i)\b(key|secret|token|password|passwd|auth|api_?key)\b\s*[:=]\s*[\"']([^\"']+)[\"']"
+)
+
+# Common safe placeholders and false-positive exceptions
+SAFE_PLACEHOLDERS = {
+    "", "redacted", "placeholder", "your_api_key", "your_key", "your_token",
+    "your_password", "none", "null", "true", "false", "test", "empty",
+    "ctrl+b", "enabled", "disabled", "xterm-kitty"
+}
+
+def is_secret_suspicious(key_name, value):
+    val_lower = value.strip().lower()
+    # Check if value is a placeholder
+    if val_lower in SAFE_PLACEHOLDERS:
+        return False
+    # Check if value references an env var (e.g., $API_KEY or ${API_KEY})
+    if val_lower.startswith("$"):
+        return False
+    # Check if it's a short string (likely not a high-entropy secret key)
+    if len(value) < 8:
+        return False
+    # If the value is a standard path (e.g. ~/.config/...), it's safe
+    if "/" in value or "\\" in value:
+        return False
+    return True
+
+def scan_file(filepath):
+    if not os.path.exists(filepath):
+        return []
+    
+    # Skip binary files or specific helper directories/extensions
+    if filepath.endswith((".png", ".jpg", ".jpeg", ".ico", ".pdf", ".zip", ".tar.gz", ".gguf")):
+        return []
+        
+    # Skip self hook file and readme
+    if "pre-commit" in filepath or "README" in filepath:
+        return []
+
+    violations = []
+    try:
+        with open(filepath, "r", encoding="utf-8", errors="ignore") as f:
+            for idx, line in enumerate(f, 1):
+                # 1. Check for private SSH key blocks
+                if PRIVATE_KEY_PATTERN.search(line):
+                    violations.append((idx, "SSH Private Key header found"))
+                    continue
+                
+                # 2. Check for suspicious assignments
+                match = SECRET_ASSIGNMENT_PATTERN.search(line)
+                if match:
+                    key_name, val = match.groups()
+                    if is_secret_suspicious(key_name, val):
+                        violations.append((idx, f"Suspicious assignment to '{key_name}' (value: '{val[:10]}...')"))
+    except Exception as e:
+        # If we can't read the file for any reason, skip it
+        pass
+        
+    return violations
+
+def main():
+    # Get staged files
+    try:
+        files = subprocess.check_output(
+            ["git", "diff", "--cached", "--name-only"], 
+            text=True
+        ).splitlines()
+    except subprocess.CalledProcessError:
+        return 0
+
+    has_violations = False
+    for filepath in files:
+        # Resolve path
+        violations = scan_file(filepath)
+        if violations:
+            has_violations = True
+            print(f"\033[0;31m❌ Git Commit Blocked: Potential Secret Detected in {filepath}\033[0m")
+            for line_no, desc in violations:
+                print(f"  Line {line_no}: {desc}")
+            print()
+
+    if has_violations:
+        print("\033[0;33m⚠️  If this is a false positive, you can bypass this check using:\033[0m")
+        print("  \033[1mgit commit --no-verify\033[0m")
+        print()
+        sys.exit(1)
+        
+    sys.exit(0)
+
+if __name__ == "__main__":
+    main()

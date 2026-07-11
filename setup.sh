@@ -122,5 +122,14 @@ check_and_backup "$HOME/.config/gtk-4.0/settings.ini"
 echo "Stowing packages..."
 stow --dotfiles -v -R -t ~ "${PACKAGES[@]}"
 
+# Configure Git hooks
+if [ -d .git ]; then
+    echo -e "\n${BLUE}--- Phase 4: Setting up Git hooks ---${NC}"
+    mkdir -p .git/hooks
+    cp git-hooks/pre-commit .git/hooks/pre-commit
+    chmod +x .git/hooks/pre-commit
+    echo "Git pre-commit hooks configured."
+fi
+
 echo -e "\n${GREEN}Setup completed successfully!${NC}"
 echo -e "Symlinks deployed to home directory. Please restart your shell."
