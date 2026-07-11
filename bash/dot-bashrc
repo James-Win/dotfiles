@@ -62,3 +62,8 @@ if [ -n "${BLE_VERSION-}" ]; then
     ble-attach
 fi
 export PATH="$HOME/.local/bin:$PATH"
+
+# Initialize Starship prompt
+if command -v starship &>/dev/null; then
+    eval "$(starship init bash)"
+fi

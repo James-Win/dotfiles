@@ -24,3 +24,8 @@ fi
 if [ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
     source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
+
+# Initialize Starship prompt
+if command -v starship &>/dev/null; then
+    eval "$(starship init zsh)"
+fi
