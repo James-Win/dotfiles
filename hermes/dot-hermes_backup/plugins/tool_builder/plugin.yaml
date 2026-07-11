@@ -1,0 +1,5 @@
+name: tool_builder
+version: 1.0.0
+description: A meta-tool that allows the agent to autonomously write and install new Python tools for itself.
+provides_tools:
+  - scaffold_custom_tool

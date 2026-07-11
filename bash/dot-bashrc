@@ -1,0 +1,64 @@
+# .bashrc
+
+# Only run this file for interactive shells
+case $- in
+    *i*) ;;
+    *) return ;;
+esac
+
+# ble.sh - Bash syntax highlighting and autosuggestions
+# Load early, attach at the very end after bashrc setup is complete.
+if [ -r "$HOME/.local/share/blesh/ble.sh" ]; then
+    source -- "$HOME/.local/share/blesh/ble.sh" --attach=none
+fi
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+
+# User specific environment
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+export PATH
+
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
+
+# User specific aliases and functions
+if [ -d "$HOME/.bashrc.d" ]; then
+    for rc in "$HOME"/.bashrc.d/*; do
+        if [ -f "$rc" ]; then
+            . "$rc"
+        fi
+    done
+fi
+unset rc
+
+# Enable Bash programmable completion
+if [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+fi
+
+# Kitty shell integration - manual Fedora path
+if [ "$TERM" = "xterm-kitty" ] && [ -r /usr/lib64/kitty/shell-integration/bash/kitty.bash ]; then
+    export KITTY_INSTALLATION_DIR="/usr/lib64/kitty"
+    export KITTY_SHELL_INTEGRATION="enabled"
+    source /usr/lib64/kitty/shell-integration/bash/kitty.bash
+fi
+
+# fzf fuzzy finder keybindings and completion
+if [ -r /usr/share/fzf/shell/key-bindings.bash ]; then
+    source /usr/share/fzf/shell/key-bindings.bash
+fi
+
+if [ -r /usr/share/fzf/shell/completion.bash ]; then
+    source /usr/share/fzf/shell/completion.bash
+fi
+
+# Attach ble.sh after bashrc setup is complete
+if [ -n "${BLE_VERSION-}" ]; then
+    ble-attach
+fi
+export PATH="$HOME/.local/bin:$PATH"

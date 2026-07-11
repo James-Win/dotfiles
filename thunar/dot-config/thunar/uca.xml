@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+<action>
+	<icon>utilities-terminal</icon>
+	<name>Open Terminal Here</name>
+	<submenu></submenu>
+	<unique-id>UNIQUE_ID_REQUIRED_FOR_FULL_FUNCTIONALITY</unique-id>
+	<command>exo-open --working-directory %f --launch TerminalEmulator</command>
+	<description>A place to add context actions for manual reference.</description>
+	<range></range>
+	<patterns>*</patterns>
+	<startup-notify/>
+</action>
+</actions>

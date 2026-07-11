@@ -1,0 +1,3 @@
+# Stop git from running globally in user home
+*
+!ObsidianVault/Sources/dotfiles/
