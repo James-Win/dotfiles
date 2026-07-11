@@ -44,7 +44,7 @@ sudo dnf install -y \
 You can automatically install all dependencies, enable the Starship prompt repository, deploy symlinks, and configure Git hooks using the provided bootstrap script:
 
 ```bash
-git clone <your-repository-url> ~/dotfiles
+git clone https://github.com/James-Win/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 ./setup.sh
 ```
