@@ -51,6 +51,9 @@ exec --no-startup-id swayidle -w timeout 300 'swaylock -f -c 000000' timeout 600
 # Network tray applet
 exec --no-startup-id nm-applet
 
+# Tailscale tray icon
+exec --no-startup-id flatpak run dev.deedles.Trayscale --hide-window
+
 # Clipboard manager
 exec --no-startup-id wl-paste -t text --watch clipman store
 
