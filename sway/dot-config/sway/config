@@ -39,25 +39,28 @@ client.background       #1a1a1a
 exec --no-startup-id dex-autostart --autostart --environment i3
 
 # Compositor
-exec --no-startup-id picom --config ~/.config/picom/picom.conf
+# exec --no-startup-id picom --config ~/.config/picom/picom.conf
 
 # Notifications
 exec --no-startup-id dunst -config ~/desktop-setup/dunst/dunstrc
 
 # Lock screen before suspend
-exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/.config/i3/scripts/lock.sh
+exec --no-startup-id swayidle -w timeout 300 'swaylock -f -c 000000' timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock -f -c 000000'
 
 # Network tray applet
 exec --no-startup-id nm-applet
 
 # Clipboard manager
-exec --no-startup-id greenclip daemon > /dev/null
+exec --no-startup-id wl-paste -t text --watch clipman store
 
 # Wallpaper
-exec_always --no-startup-id ~/.fehbg
+exec_always --no-startup-id swaybg -i /home/james/Pictures/wallpapers/wallpaper.jpg -m fill
 
-# Polybar
-exec_always --no-startup-id ~/.config/polybar/launch.sh
+# Waybar
+# exec_always --no-startup-id ~/.config/polybar/launch.sh
+bar {
+    swaybar_command waybar
+}
 
 # Custom window rule script
 #exec_always --no-startup-id ~/.config/i3/scripts/start-max-2-windows.sh
@@ -87,20 +90,20 @@ bindsym $mod+Shift+h exec --no-startup-id hermes desktop
 # PulseAudio/PipeWire volume control
 bindsym $mod+Shift+v exec --no-startup-id pavucontrol
 
-bindsym $mod+Shift+Escape exec --no-startup-id i3-nagbar -t warning -m 'Kill all apps and end this user session?' -b 'Yes, kill everything' 'pkill -KILL -u "$USER"'
+bindsym $mod+Shift+Escape exec --no-startup-id swaynag -t warning -m 'Kill all apps and end this user session?' -b 'Yes, kill everything' 'swaymsg exit'
 
 # ============================================================
 # Screenshots
 # ============================================================
 
 # Select region and copy to clipboard
-bindsym Print exec --no-startup-id "maim -s | xclip -selection clipboard -t image/png"
+bindsym Print exec --no-startup-id "grim -g \"$(slurp)\" - | wl-copy"
 
 # Select region and save to Pictures
-bindsym Shift+Print exec --no-startup-id "maim -s ~/Pictures/screenshot_$(date +%Y-%m-%d_%H-%M-%S).png"
+bindsym Shift+Print exec --no-startup-id "grim -g \"$(slurp)\" ~/Pictures/screenshot_$(date +%Y-%m-%d_%H-%M-%S).png"
 
 # Capture full screen and copy to clipboard
-bindsym Ctrl+Print exec --no-startup-id "maim | xclip -selection clipboard -t image/png"
+bindsym Ctrl+Print exec --no-startup-id "grim - | wl-copy"
 
 # ============================================================
 # Audio Controls
@@ -244,8 +247,8 @@ bindsym $mod+Shift+c reload
 # Restart i3 in place
 bindsym $mod+Shift+r restart
 
-# Exit i3 session
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+# Exit sway session
+bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'"
 
 # ============================================================
 # Disabled Default i3bar
@@ -299,7 +302,7 @@ bindsym $mod+m scratchpad show
 bindsym Mod1+v exec --no-startup-id veracrypt
 for_window [class="veracrypt"] floating enable
 
-bindsym $mod+Shift+s exec --no-startup-id i3lock && systemctl suspend
+bindsym $mod+Shift+s exec --no-startup-id swaylock -c 000000 && systemctl suspend
 
 bindsym $mod+Tab workspace next
 
@@ -310,3 +313,20 @@ bindsym --whole-window Control+button3 workspace next_on_output
 bindsym $mod+Shift+period exec --no-startup-id ~/.local/bin/i3-hotkeys-auto
 bindsym $mod+Shift+i exec --no-startup-id ~/.local/bin/i3-control
 bindsym $mod+Shift+backslash exec --no-startup-id ~/.local/bin/i3-scripts-menu
+
+
+# Disable ugly window title bars
+default_border pixel 2
+
+# Frosted glass blur (makes transparent terminal windows look amazing)
+blur enable
+blur_passes 3
+blur_radius 5
+
+# Deep, smooth drop shadows
+shadows enable
+shadow_blur_radius 20
+shadow_color #0000007F
+
+# Smooth corner rounding
+corner_radius 12

@@ -70,6 +70,8 @@ PACKAGES=(
     "zsh"
     "git"
     "i3"
+    "sway"
+    "waybar"
     "kitty"
     "polybar"
     "picom"
