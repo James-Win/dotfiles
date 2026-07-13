@@ -12,11 +12,10 @@
     "margin-bottom": 0,
     "modules-left": [
         "sway/workspaces",
-        "sway/mode",
-        "sway/window"
+        "sway/mode"
     ],
     "modules-center": [
-        "clock"
+        "sway/window"
     ],
     "modules-right": [
         "tray",
@@ -25,7 +24,8 @@
         "memory",
         "network",
         "pulseaudio",
-        "battery"
+        "battery",
+        "clock"
     ],
     "sway/workspaces": {
         "disable-scroll": true,
