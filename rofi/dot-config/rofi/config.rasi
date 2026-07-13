@@ -1,64 +1,88 @@
-configuration-version: 2
-display-drun: 0
-display-run: 0
-display-window: 0
-display-ssh: 0
-display-combi: 0
-display-niri: 0
-monitor: 0
-location: 0
-show-icons: true
-drun-icon-theme: breeze-dark
-window-format: {n} {w}
-window-command: i3-msg -t command "{Window}"
-run-shell-command: rofi-sensible-terminal
-threads: 0
-scroll-method: 0
-lines: 12
-columns: 1
-width: 50
-height: 50
-spacing: 5
-padding: 10
-terminal: i3-sensible-terminal
-hide-scrollbar: true
-sidebar-mode: false
-eh: 2
-disable-history: false
-sort: true
-cycle: false
-case-sensitive: false
-matching-method: normal
-drun-categories: ""
-drun-display-format: {name}
-hide-workaround: false
-filter: ""
-pid: "/dev/null"
- History: false
- normal-window: ""
-  location: northwest
-  anchor: northwest
-  y-offset: 15
-  x-offset: 15
-  fixed-columns: true
-  columns: 1
-  lines: 12
-  width: 50
-  height: 50
-  padding: 10
-  border-width: 1
-  border-radius: 8
-  border-color: #83CAFA
-  background-color: #1a1a1a
-  text-color: #cccccc
-  text-color-urgent: #EC69A0
-  text-color-active: #ffffff
-  normal-background: #222222
-  normal-foreground: #cccccc
-  urgent-background: #DB3279
-  urgent-foreground: #ffffff
-  active-background: #294172
-  active-foreground: #ffffff
-  font: Noto Sans Mono 10
-  highlight: bold
-  highlight-color: #83CAFA
+configuration {
+    display-drun: "";
+    display-run: "";
+    display-window: "";
+    display-ssh: "";
+    display-combi: "";
+    monitor: 0;
+    location: 0;
+    show-icons: true;
+    drun-icon-theme: "breeze-dark";
+    window-format: "{n} {w}";
+    window-command: "i3-msg -t command \"{Window}\"";
+    run-shell-command: "rofi-sensible-terminal";
+    threads: 0;
+    scroll-method: 0;
+    lines: 12;
+    columns: 1;
+    width: 50;
+    height: 50;
+    spacing: 5;
+    padding: 10;
+    terminal: "i3-sensible-terminal";
+    hide-scrollbar: true;
+    sidebar-mode: false;
+    eh: 2;
+    disable-history: false;
+    sort: true;
+    cycle: false;
+    case-sensitive: false;
+    matching: "normal";
+    drun-categories: "";
+    drun-display-format: "{name}";
+    filter: "";
+    pid: "/dev/null";
+    normal-window: "";
+}
+
+window {
+    location: northwest;
+    anchor: northwest;
+    y-offset: 15;
+    x-offset: 15;
+    fixed-num-lines: true;
+    columns: 1;
+    lines: 12;
+    width: 50%;
+    height: 50%;
+    padding: 10px;
+    border: 1px;
+    border-radius: 8px;
+    border-color: #83CAFA;
+    background-color: #1a1a1a;
+    text-color: #cccccc;
+}
+
+* {
+    font: "Noto Sans Mono 10";
+    highlight: bold;
+}
+
+element {
+    text-color: #cccccc;
+}
+
+element urgent {
+    background-color: #DB3279;
+    text-color: #ffffff;
+}
+
+element active {
+    background-color: #294172;
+    text-color: #ffffff;
+}
+
+element selected.urgent {
+    background-color: #DB3279;
+    text-color: #ffffff;
+}
+
+element selected.active {
+    background-color: #294172;
+    text-color: #ffffff;
+}
+
+element selected.normal {
+    background-color: #222222;
+    text-color: #cccccc;
+}

@@ -42,7 +42,7 @@ exec --no-startup-id dex-autostart --autostart --environment i3
 # exec --no-startup-id picom --config ~/.config/picom/picom.conf
 
 # Notifications
-exec --no-startup-id dunst -config ~/desktop-setup/dunst/dunstrc
+exec --no-startup-id swaync
 
 # Lock screen before suspend
 exec --no-startup-id swayidle -w timeout 300 'swaylock -f -c 000000' timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock -f -c 000000'
@@ -80,8 +80,8 @@ bindsym $mod+Return exec --no-startup-id kitty
 # Firefox
 bindsym $mod+Shift+f exec --no-startup-id firefox
 
-# Rofi app launcher
-bindsym $mod+space exec --no-startup-id "rofi -show drun -theme ~/.config/rofi/theme.rasi"
+# Fuzzel app launcher
+bindsym $mod+space exec --no-startup-id fuzzel
 bindsym $mod+Shift+h exec --no-startup-id hermes desktop
 
 # Optional Rofi run/window/ssh mode
@@ -124,8 +124,12 @@ bindsym $mod+Shift+q kill
 # Drag floating windows with mouse + mod
 floating_modifier $mod
 
-# Toggle floating
+# Toggle floating (Keyboard)
 bindsym $mod+Shift+space floating toggle
+
+# Toggle floating (Mouse + Super key on whole window)
+bindsym --whole-window $mod+button2 floating toggle
+bindsym --whole-window $mod+button3 floating toggle
 
 # Fullscreen
 bindsym $mod+f fullscreen toggle
