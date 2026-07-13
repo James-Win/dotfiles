@@ -10,7 +10,7 @@ set $mod Mod4
 # Appearance
 # ============================================================
 
-font pango:JetBrains Mono 9
+font pango:JetBrainsMono Nerd Font 9
 
 default_border pixel 2
 default_floating_border pixel 2
