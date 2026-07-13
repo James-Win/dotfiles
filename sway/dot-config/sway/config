@@ -80,6 +80,7 @@ exec --no-startup-id /usr/libexec/xfce-polkit
 
 # Terminal
 bindsym $mod+Return exec --no-startup-id kitty
+bindsym --whole-window Mod1+button3 exec --no-startup-id kitty
 
 # Firefox
 bindsym $mod+Shift+f exec --no-startup-id firefox
