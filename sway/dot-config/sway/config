@@ -43,6 +43,7 @@ exec --no-startup-id dex-autostart --autostart --environment i3
 
 # Notifications
 exec --no-startup-id swaync
+bindsym $mod+Shift+n exec swaync-client -t -sw
 
 # Lock screen before suspend
 exec --no-startup-id swayidle -w timeout 300 'swaylock -f -c 000000' timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock -f -c 000000'
@@ -118,8 +119,9 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 # Window Management
 # ============================================================
 
-# Kill focused window
+# Kill focused window (Keyboard and Mouse)
 bindsym $mod+Shift+q kill
+bindsym --whole-window $mod+Shift+button1 kill
 
 # Drag floating windows with mouse + mod
 floating_modifier $mod
