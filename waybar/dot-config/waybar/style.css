@@ -49,7 +49,7 @@ tooltip {
     border-radius: 12px;
 }
 
-#clock, #battery, #cpu, #memory, #network, #pulseaudio, #tray, #mode {
+#clock, #battery, #cpu, #memory, #network, #pulseaudio, #tray, #mode, #custom-gpu {
     background: #24273a;
     padding: 0 14px;
     margin: 4px;
@@ -92,3 +92,7 @@ tooltip {
         background-color: #ed8796;
     }
 }
+
+#cpu { color: #8bd5ca; }
+#memory { color: #eed49f; }
+#custom-gpu { color: #8aadf4; }

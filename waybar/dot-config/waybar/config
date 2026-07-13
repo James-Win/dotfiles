@@ -20,6 +20,7 @@
     ],
     "modules-right": [
         "tray",
+        "custom/gpu",
         "cpu",
         "memory",
         "network",
@@ -100,5 +101,11 @@
         "format-plugged": " {capacity}%",
         "format-alt": "{icon} {time}",
         "format-icons": ["", "", "", "", ""]
+    },
+    "custom/gpu": {
+        "exec": "nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits",
+        "format": "󰢮 {}%",
+        "interval": 2,
+        "tooltip": false
     }
 }
