@@ -261,7 +261,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # Exit sway session (wlogout power menu)
-bindsym $mod+Shift+e exec wlogout -b 5 -c 0 -r 0 -m 0
+bindsym $mod+Shift+e exec wlogout -b 6 -c 10 -r 10 -T 400 -B 400 -L 400 -R 400
 
 # ============================================================
 # Disabled Default i3bar
