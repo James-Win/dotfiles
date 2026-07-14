@@ -6,3 +6,18 @@ if [ -f ~/.bashrc ]; then
 fi
 
 # User specific environment and startup programs
+
+# Qt theme settings
+export QT_STYLE_OVERRIDE=kvantum
+export QT_QPA_PLATFORMTHEME=qt5ct
+
+# ============================================================
+# Native Wayland & NVIDIA Hardware Acceleration
+# ============================================================
+export MOZ_ENABLE_WAYLAND=1
+export QT_QPA_PLATFORM="wayland;xcb"
+export GDK_BACKEND="wayland,x11"
+export OZONE_PLATFORM=wayland
+export LIBVA_DRIVER_NAME=nvidia
+export GBM_BACKEND=nvidia-drm
+export __GLX_VENDOR_LIBRARY_NAME=nvidia
