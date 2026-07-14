@@ -114,13 +114,18 @@ bindsym Shift+Print exec --no-startup-id "grim -g \"$(slurp)\" ~/Pictures/screen
 bindsym Ctrl+Print exec --no-startup-id "grim - | wl-copy"
 
 # ============================================================
-# Audio Controls
+# SwayOSD Daemon
+# ============================================================
+exec --no-startup-id swayosd-server
+
+# ============================================================
+# Audio Controls (SwayOSD)
 # ============================================================
 
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86AudioRaiseVolume exec --no-startup-id swayosd-client --output-volume raise
+bindsym XF86AudioLowerVolume exec --no-startup-id swayosd-client --output-volume lower
+bindsym XF86AudioMute exec --no-startup-id swayosd-client --output-volume mute-toggle
+bindsym XF86AudioMicMute exec --no-startup-id swayosd-client --input-volume mute-toggle
 
 # ============================================================
 # Window Management
