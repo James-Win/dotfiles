@@ -11,6 +11,7 @@ set $mod Mod4
 # ============================================================
 
 font pango:JetBrainsMono Nerd Font 9
+seat seat0 xcursor_theme catppuccin-macchiato-blue-cursors 24
 
 default_border pixel 2
 default_floating_border pixel 2
@@ -55,7 +56,9 @@ exec --no-startup-id nm-applet
 exec --no-startup-id flatpak run dev.deedles.Trayscale --hide-window
 
 # Clipboard manager
-exec --no-startup-id wl-paste -t text --watch clipman store
+exec --no-startup-id wl-paste --type text --watch cliphist store
+exec --no-startup-id wl-paste --type image --watch cliphist store
+bindsym $mod+v exec --no-startup-id "cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"
 
 # Wallpaper
 exec_always --no-startup-id swaybg -i /home/james/Pictures/wallpapers/wallpaper.jpg -m fill
@@ -101,8 +104,8 @@ bindsym $mod+Shift+Escape exec --no-startup-id swaynag -t warning -m 'Kill all a
 # Screenshots
 # ============================================================
 
-# Select region and copy to clipboard
-bindsym Print exec --no-startup-id "grim -g \"$(slurp)\" - | wl-copy"
+# Select region and annotate in swappy, then copy to clipboard
+bindsym Print exec --no-startup-id "grim -g \"$(slurp)\" - | swappy -f - -o - | wl-copy"
 
 # Select region and save to Pictures
 bindsym Shift+Print exec --no-startup-id "grim -g \"$(slurp)\" ~/Pictures/screenshot_$(date +%Y-%m-%d_%H-%M-%S).png"
@@ -257,8 +260,8 @@ bindsym $mod+Shift+c reload
 # Restart i3 in place
 bindsym $mod+Shift+r restart
 
-# Exit sway session
-bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'"
+# Exit sway session (wlogout power menu)
+bindsym $mod+Shift+e exec wlogout -b 5 -c 0 -r 0 -m 0
 
 # ============================================================
 # Disabled Default i3bar
