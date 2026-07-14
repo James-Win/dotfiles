@@ -273,6 +273,14 @@ bindsym $mod+Shift+e exec wlogout -b 5 -c 0 -r 0 -m 0
 # bar {
 #     status_command i3status
 # }
+
+# ============================================================
+# Power Management
+# ============================================================
+exec swayidle -w \
+    timeout 600 'swaymsg "output * dpms off"' \
+    resume 'swaymsg "output * dpms on"'
+
 # Popup and dialog floating rules
 for_window [window_type="dialog"] floating enable
 for_window [window_type="utility"] floating enable
