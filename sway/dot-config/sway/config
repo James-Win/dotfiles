@@ -58,7 +58,7 @@ exec --no-startup-id flatpak run dev.deedles.Trayscale --hide-window
 # Clipboard manager
 exec --no-startup-id wl-paste --type text --watch cliphist store
 exec --no-startup-id wl-paste --type image --watch cliphist store
-bindsym $mod+v exec --no-startup-id "cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"
+bindsym $mod+c exec --no-startup-id "cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"
 
 # Wallpaper
 exec_always --no-startup-id swaybg -i /home/james/Pictures/wallpapers/wallpaper.jpg -m fill
