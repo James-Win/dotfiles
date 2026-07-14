@@ -303,7 +303,9 @@ for_window [class="Thunar"] floating enable, resize set 900 600, move position c
 for_window [app_id="thunar"] floating enable, resize set 900 600, move position center
 for_window [app_id="Thunar"] floating enable, resize set 900 600, move position center
 for_window [class="kitty"] floating enable, resize set 800 600, move position center
+for_window [app_id="kitty"] floating enable, resize set 800 600, move position center
 for_window [class="protonvpn"] floating enable
+for_window [app_id="protonvpn"] floating enable
 
 exec --no-startup-id solaar --window=hide
 bindsym $mod+Shift+o exec --no-startup-id gtk-launch obsidian
@@ -311,9 +313,13 @@ bindsym Mod1+c exec --no-startup-id google-chrome
 
 # VLC opens as a floating pop-up on workspace 8
 assign [class="vlc"] 8
+assign [app_id="vlc"] 8
 for_window [class="vlc"] floating enable
+for_window [app_id="vlc"] floating enable
 for_window [class="vlc"] resize set 900 600
+for_window [app_id="vlc"] resize set 900 600
 for_window [class="vlc"] move position center
+for_window [app_id="vlc"] move position center
 
 
 # Hide focused window like minimizing
@@ -324,6 +330,7 @@ bindsym $mod+m scratchpad show
 
 bindsym Mod1+v exec --no-startup-id veracrypt
 for_window [class="veracrypt"] floating enable
+for_window [app_id="veracrypt"] floating enable
 
 bindsym $mod+Shift+s exec --no-startup-id swaylock -c 000000 && systemctl suspend
 
