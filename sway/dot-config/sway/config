@@ -116,17 +116,7 @@ bindsym Ctrl+Print exec --no-startup-id "grim - | wl-copy"
 # ============================================================
 # Volume OSD (wob — Wayland Overlay Bar)
 # ============================================================
-# Catppuccin Macchiato: bg=#24273a border/bar=#8aadf4
-exec --no-startup-id rm -f /tmp/wob-volume.pipe && mkfifo /tmp/wob-volume.pipe && tail -f /tmp/wob-volume.pipe | wob \
-    --background-color=0xe624273a \
-    --border-color=0xff8aadf4 \
-    --bar-color=0xff8aadf4 \
-    --overflow-background-color=0xe6ed8796 \
-    --overflow-bar-color=0xffed8796 \
-    --overflow-border-color=0xffed8796 \
-    --width 400 --height 40 --border 3 --padding 8 \
-    --anchor bottom --anchor h-center \
-    --margin 80
+exec --no-startup-id rm -f /tmp/wob-volume.pipe && mkfifo /tmp/wob-volume.pipe && tail -f /tmp/wob-volume.pipe | wob
 
 # ============================================================
 # Audio Controls (wob OSD)
