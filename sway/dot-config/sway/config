@@ -114,18 +114,28 @@ bindsym Shift+Print exec --no-startup-id "grim -g \"$(slurp)\" ~/Pictures/screen
 bindsym Ctrl+Print exec --no-startup-id "grim - | wl-copy"
 
 # ============================================================
-# SwayOSD Daemon
+# Volume OSD (wob — Wayland Overlay Bar)
 # ============================================================
-exec --no-startup-id swayosd-server
+# Catppuccin Macchiato: bg=#24273a border/bar=#8aadf4
+exec --no-startup-id rm -f /tmp/wob-volume.pipe && mkfifo /tmp/wob-volume.pipe && tail -f /tmp/wob-volume.pipe | wob \
+    --background-color=0xe624273a \
+    --border-color=0xff8aadf4 \
+    --bar-color=0xff8aadf4 \
+    --overflow-background-color=0xe6ed8796 \
+    --overflow-bar-color=0xffed8796 \
+    --overflow-border-color=0xffed8796 \
+    --width 400 --height 40 --border 3 --padding 8 \
+    --anchor bottom --anchor h-center \
+    --margin 80
 
 # ============================================================
-# Audio Controls (SwayOSD)
+# Audio Controls (wob OSD)
 # ============================================================
 
-bindsym XF86AudioRaiseVolume exec --no-startup-id swayosd-client --output-volume raise
-bindsym XF86AudioLowerVolume exec --no-startup-id swayosd-client --output-volume lower
-bindsym XF86AudioMute exec --no-startup-id swayosd-client --output-volume mute-toggle
-bindsym XF86AudioMicMute exec --no-startup-id swayosd-client --input-volume mute-toggle
+bindsym XF86AudioRaiseVolume exec --no-startup-id volume-osd raise
+bindsym XF86AudioLowerVolume exec --no-startup-id volume-osd lower
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 # ============================================================
 # Window Management
