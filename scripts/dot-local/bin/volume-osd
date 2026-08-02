@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# Adjust volume with pactl and show the result in wob.
+set -euo pipefail
+
+PIPE=/tmp/wob-volume.pipe
+
+case "${1:-}" in
+    raise)
+        pactl set-sink-mute @DEFAULT_SINK@ 0
+        pactl set-sink-volume @DEFAULT_SINK@ +5%
+        ;;
+    lower)
+        pactl set-sink-volume @DEFAULT_SINK@ -5%
+        ;;
+    mute)
+        pactl set-sink-mute @DEFAULT_SINK@ toggle
+        ;;
+    *)
+        echo "usage: volume-osd raise|lower|mute" >&2
+        exit 1
+        ;;
+esac
+
+if [ "$(pactl get-sink-mute @DEFAULT_SINK@)" = "Mute: yes" ]; then
+    vol=0
+else
+    vol=$(pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '\d+(?=%)' | head -1)
+fi
+
+if [ -p "$PIPE" ]; then
+    echo "$vol" > "$PIPE"
+fi

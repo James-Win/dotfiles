@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Adjust screen brightness with brightnessctl and show the result in wob.
+set -euo pipefail
+
+PIPE=/tmp/wob-volume.pipe
+
+case "${1:-}" in
+    up)
+        brightnessctl set +5%
+        ;;
+    down)
+        brightnessctl set 5%-
+        ;;
+    *)
+        echo "usage: brightness-osd up|down" >&2
+        exit 1
+        ;;
+esac
+
+percent=$(brightnessctl -m | cut -d, -f4 | tr -d '%')
+
+if [ -p "$PIPE" ]; then
+    echo "$percent" > "$PIPE"
+fi

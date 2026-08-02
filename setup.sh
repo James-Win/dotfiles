@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# setup.sh - Bootstrap script for Fedora i3wm dotfiles
+# setup.sh - Bootstrap script for Fedora Sway dotfiles
 set -euo pipefail
 
 # Colors for output
@@ -10,7 +10,7 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 echo -e "${BLUE}====================================================${NC}"
-echo -e "${BLUE}        Fedora i3wm Dotfiles Bootstrapper           ${NC}"
+echo -e "${BLUE}        Fedora Sway Dotfiles Bootstrapper           ${NC}"
 echo -e "${BLUE}====================================================${NC}"
 
 # 1. OS Validation
@@ -34,21 +34,37 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 echo -e "\n${BLUE}--- Phase 1: Installing System Dependencies via DNF ---${NC}"
 sudo dnf install -y \
   stow \
-  i3 \
-  i3lock \
-  maim \
+  sway \
+  swaybg \
+  swayidle \
+  swaylock \
+  waybar \
+  SwayNotificationCenter \
+  fuzzel \
+  grim \
+  slurp \
+  swappy \
+  wl-clipboard \
+  cliphist \
+  wob \
+  wlogout \
+  brightnessctl \
+  pavucontrol \
+  network-manager-applet \
+  dex-autostart \
   ImageMagick \
-  xss-lock \
-  polybar \
-  picom \
-  dunst \
   kitty \
-  thunar \
+  Thunar \
   mangohud \
   zsh \
   zsh-autosuggestions \
   zsh-syntax-highlighting \
   fzf
+
+# Optional extras — don't fail the whole setup if a package is unavailable
+for pkg in xfce-polkit solaar; do
+    sudo dnf install -y "$pkg" || echo -e "${RED}Warning: could not install optional package '$pkg', skipping.${NC}"
+done
 
 # 4. Enable Starship COPR and Install
 echo -e "\n${BLUE}--- Phase 2: Installing Starship Cross-Shell Prompt ---${NC}"
@@ -69,20 +85,17 @@ PACKAGES=(
     "bash"
     "zsh"
     "git"
-    "i3"
     "sway"
     "waybar"
+    "wob"
+    "scripts"
     "kitty"
-    "polybar"
-    "picom"
-    "dunst"
     "mangohud"
     "thunar"
     "hermes"
-    "rofi"
     "gtk"
-    "xsettingsd"
     "starship"
+    "xfce4-terminal"
 )
 
 # Move to the dotfiles directory
@@ -111,13 +124,10 @@ check_and_backup "$HOME/.zshrc"
 check_and_backup "$HOME/.gitconfig"
 check_and_backup "$HOME/.gitignore"
 check_and_backup "$HOME/.gtkrc-2.0"
-check_and_backup "$HOME/.config/i3"
+check_and_backup "$HOME/.config/sway"
+check_and_backup "$HOME/.config/waybar"
+check_and_backup "$HOME/.config/wob"
 check_and_backup "$HOME/.config/kitty"
-check_and_backup "$HOME/.config/polybar"
-check_and_backup "$HOME/.config/picom"
-check_and_backup "$HOME/.config/dunst"
-check_and_backup "$HOME/.config/rofi"
-check_and_backup "$HOME/.config/xsettingsd/xsettingsd.conf"
 check_and_backup "$HOME/.config/gtk-3.0/settings.ini"
 check_and_backup "$HOME/.config/gtk-4.0/settings.ini"
 
