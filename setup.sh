@@ -34,7 +34,6 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 echo -e "\n${BLUE}--- Phase 1: Installing System Dependencies via DNF ---${NC}"
 sudo dnf install -y \
   stow \
-  sway \
   swaybg \
   swayidle \
   swaylock \
@@ -66,8 +65,29 @@ for pkg in xfce-polkit solaar; do
     sudo dnf install -y "$pkg" || echo -e "${RED}Warning: could not install optional package '$pkg', skipping.${NC}"
 done
 
-# 4. Enable Starship COPR and Install
-echo -e "\n${BLUE}--- Phase 2: Installing Starship Cross-Shell Prompt ---${NC}"
+# 4a. Install SwayFX (sway fork adding blur/shadows/rounded corners).
+# The sway config uses blur/shadows/corner_radius, which vanilla sway CANNOT
+# parse -- it aborts the whole config load. SwayFX is required, not optional.
+#
+# Two wrinkles make this more than a plain `dnf install`:
+#   * swayfx and sway both provide `sway`, so they conflict -- the existing
+#     sway package has to be erased (--allowerasing).
+#   * Fedora marks sway as a protected package (/etc/dnf/protected.d/), which
+#     makes dnf refuse to remove it, so protected_packages is cleared for this
+#     one transaction.
+# swayfx installs its own /usr/bin/sway, so grimshot, sway-systemd,
+# sddm-wayland-sway and the sway.desktop session entry keep working as-is.
+echo -e "\n${BLUE}--- Phase 2a: Installing SwayFX Compositor ---${NC}"
+if ! rpm -q swayfx &>/dev/null; then
+    echo "Enabling swayfx/swayfx COPR repository..."
+    sudo dnf copr enable -y swayfx/swayfx
+    sudo dnf install -y --allowerasing --setopt=protected_packages= swayfx
+else
+    echo "SwayFX is already installed."
+fi
+
+# 4b. Enable Starship COPR and Install
+echo -e "\n${BLUE}--- Phase 2b: Installing Starship Cross-Shell Prompt ---${NC}"
 if ! rpm -q starship &>/dev/null; then
     echo "Enabling atim/starship COPR repository..."
     sudo dnf copr enable -y atim/starship

@@ -361,19 +361,19 @@ bindsym $mod+Shift+backslash exec --no-startup-id ~/.local/bin/i3-scripts-menu
 # Disable ugly window title bars
 default_border pixel 2
 
-# SwayFX-only eye candy — these commands do not exist in vanilla sway and
-# make it show a config-error nag bar on startup. Uncomment on machines
-# running SwayFX instead of plain sway.
+# SwayFX-only eye candy — these commands do not exist in vanilla sway, which
+# aborts the config load on them. setup.sh installs SwayFX in place of sway;
+# comment this block out on any machine still running plain sway.
 
 # Frosted glass blur (makes transparent terminal windows look amazing)
-# blur enable
-# blur_passes 3
-# blur_radius 5
+blur enable
+blur_passes 3
+blur_radius 5
 
 # Deep, smooth drop shadows
-# shadows enable
-# shadow_blur_radius 20
-# shadow_color #0000007F
+shadows enable
+shadow_blur_radius 20
+shadow_color #0000007F
 
 # Smooth corner rounding
-# corner_radius 12
+corner_radius 12
