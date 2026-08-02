@@ -78,6 +78,15 @@ fi
 
 # 5. Apply Symlinks using GNU Stow
 echo -e "\n${BLUE}--- Phase 3: Applying Symlinks using GNU Stow ---${NC}"
+
+# stow < 2.4 has a --dotfiles bug that breaks on dot-config directories
+# ("stow_contents() called with non-directory path")
+STOW_VERSION="$(stow --version | grep -oE '[0-9]+\.[0-9]+(\.[0-9]+)?' | head -1)"
+if [ "$(printf '%s\n' "2.4" "$STOW_VERSION" | sort -V | head -1)" != "2.4" ]; then
+    echo -e "${RED}ERROR: GNU Stow >= 2.4 is required (found $STOW_VERSION); its --dotfiles mode breaks on directories.${NC}"
+    exit 1
+fi
+
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Declare the packages to stow
